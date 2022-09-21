@@ -1,2 +1,3 @@
-FROM pytorch/pytorch：1.9.1-cuda11.1-cudnn8-devel
-RUN pip install opencv-python tb-nightly
+FROM pytorch/pytorch:1.10.0-cuda11.3-cudnn8-devel
+RUN pip install torch==1.10.0
+RUN pip install torchvision==0.11.1
