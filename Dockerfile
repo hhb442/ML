@@ -6,5 +6,3 @@ RUN pip install numpy
 FROM biocontainers/matplotlib-venn
 RUN pip insatll matplotlib
 RUN pip install pycocotools
-FROM sequoiatools/pillowfight
-RUN pip install Pillow
