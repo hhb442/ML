@@ -1,14 +1,15 @@
-FROM pytorch/pytorch:1.9.1-cuda11.1-cudnn8-devel
-RUN pip install opencv-python-headless
-RUN pip install numpy
-RUN pip install fairscale
-RUN pip install fvcore
-RUN pip install iopath
-RUN pip install tabulate
-RUN pip install termcolor
-RUN pip install cython pip install pycocotools
-RUN pip install requests-ntlm
-RUN pip install omegaConf
-RUN pip install timm
-RUN pip install tensorboard
-RUN pip install cloudpickle
+ARG PYTORCH="1.1.0"
+ARG CUDA="10.0"
+ARG CUDNN="7.5"
+
+FROM pytorch/pytorch:${PYTORCH}-cuda${CUDA}-cudnn${CUDNN}-devel
+
+RUN apt-get update && apt-get install -y libglib2.0-0 libsm6 libxrender-dev libxext6 \
+ && apt-get clean \
+ && rm -rf /var/lib/apt/lists/*
+
+# Install mmdetection
+RUN conda install cython -y && conda clean --all
+RUN git clone https://github.com/open-mmlab/mmdetection.git /mmdetection
+WORKDIR /mmdetection
+RUN pip install --no-cache-dir -e .
