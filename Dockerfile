@@ -1,17 +1,9 @@
-ARG PYTORCH="1.1.0"
-ARG CUDA="10.0"
-ARG CUDNN="7.5"
-
-FROM pytorch/pytorch:${PYTORCH}-cuda${CUDA}-cudnn${CUDNN}-devel
-
-RUN apt-get update && apt-get install -y libglib2.0-0 libsm6 libxrender-dev libxext6 \
- && apt-get clean \
- && rm -rf /var/lib/apt/lists/*
-
-# Install mmdetection
-RUN conda install cython -y && conda clean --all
-RUN git clone https://github.com/open-mmlab/mmdetection.git /mmdetection
-WORKDIR /mmdetection
-RUN pip install --no-cache-dir -e .
-RUN pip install mmcv>=0.2.10
-RUN pip install imagecorruptions
+docker pull pytorch/pytorch:1.7.1-cuda11.0-cudnn8-devel
+RUN pip install lxml
+RUN pip install matplotlib
+RUN pip install numpy
+RUN pip install tqdm
+RUN pip install torch==1.7.1
+RUN pip install torchvision==0.8.2
+RUN pip install pycocotools
+RUN pip install Pillow
