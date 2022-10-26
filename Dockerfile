@@ -18,8 +18,7 @@ RUN apt-get update && apt-get install -y ffmpeg libsm6 libxext6 git ninja-build 
 
 # Install MMCV
 RUN pip install --no-cache-dir --upgrade pip wheel setuptools
-#RUN pip install --no-cache-dir mmcv-full==1.3.17 -f https://download.openmmlab.com/mmcv/dist/cu101/torch1.6.0/index.html
-RUN pip install mmcv-full==1.6.2 -f https://download.openmmlab.com/mmcv/dist/cu110/torch1.7/index.html
+RUN pip install --no-cache-dir mmcv-full==1.6.2 -f https://download.openmmlab.com/mmcv/dist/cu110/torch1.7/index.html
 
 # Install MMDetection
 RUN conda clean --all
