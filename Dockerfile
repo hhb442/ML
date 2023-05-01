@@ -16,15 +16,13 @@
         && apt-get clean \
         && rm -rf /var/lib/apt/lists/*
 
-    # Install MMCV
-    RUN pip install --no-cache-dir --upgrade pip wheel setuptools
-    #RUN pip install --no-cache-dir mmcv-full==1.3.17 -f https://download.openmmlab.com/mmcv/dist/cu101/torch1.6.0/index.html
-    RUN pip install --no-cache-dir mmcv-full==1.6.2 -f https://download.openmmlab.com/mmcv/dist/cu110/torch1.7/index.html
-
-    # Install MMDetection
+    # Install MMCV MMDetection
+    RUN pip install mmcv-full -f https://download.openmmlab.com/mmcv/dist/cu101/torch1.6.0/index.html
+    RUN pip install mmdet
+    # Install MMRotate
     RUN conda clean --all
-    RUN git clone https://github.com/open-mmlab/mmdetection.git /mmdetection
-    WORKDIR /mmdetection
+    RUN git clone https://github.com/open-mmlab/mmrotate.git /mmrotate
+    WORKDIR /mmrotate
     ENV FORCE_CUDA="1"
-    RUN pip install --no-cache-dir -r requirements/build.txt
+    RUN pip install -r requirements/build.txt
     RUN pip install --no-cache-dir -e .
